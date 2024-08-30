@@ -5,7 +5,7 @@ import os
 from aiogram import *
 from dotenv import load_dotenv
 
-from app.handlers import router
+from app.main_handler import router
 
 load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
