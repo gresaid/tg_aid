@@ -19,7 +19,7 @@ async def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+    logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(message)s')
     logging.log(level=logging.ERROR, msg='Starting Bot...')
     try:
         asyncio.run(main())
