@@ -1,31 +1,36 @@
-# Установка базового образа с Python
-FROM python:3.10-slim as python-base
+# temp stage
+FROM python:3.12.2-slim as builder
 
-# Установка переменных окружения
-ENV PIP_CACHE_DIR=/opt/.cache
-
-# Создание слоя для установки зависимостей
-FROM python-base as dependencies
-
-# Обновление pip и установка зависимостей из requirements.txt
-RUN python3 -m venv /opt/venv \
-    && /opt/venv/bin/pip install --upgrade pip setuptools \
-    && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
-
-# Создание финального слоя приложения
-FROM python-base as app
-
-# Копирование установленного виртуального окружения
-COPY --from=dependencies /opt/venv /opt/venv
-
-# Установка переменной PATH для использования виртуального окружения
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Установка рабочей директории
 WORKDIR /app
 
-# Копирование всех файлов в рабочую директорию
-COPY . .
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Запуск приложения
+# Установка зависимостей для сборки
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+# Обновление pip до последней версии и создание wheel-файлов
+RUN pip install --upgrade pip && \
+    pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
+
+# final stage
+FROM python:3.12.2-slim
+
+WORKDIR /app
+
+# Копирование wheel-файлов и requirements.txt из предыдущей стадии
+COPY --from=builder /app/wheels /wheels
+COPY --from=builder /app/requirements.txt .
+
+# Установка зависимостей
+RUN pip install --no-cache-dir /wheels/*
+
+# Копирование всего проекта из корневой директории
+COPY ../ .
+
+# Команда для запуска приложения
 CMD ["python", "main.py"]
