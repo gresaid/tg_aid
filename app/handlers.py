@@ -1,11 +1,10 @@
-import os
-
-from aiogram import Router, F, types
+from aiogram import Router, F
+from aiogram.enums import ParseMode, ChatAction
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery, FSInputFile
-import app.keyboards as kb
 from aiogram.utils import markdown
-from aiogram.enums import ParseMode, ChatAction
+
+import app.keyboards as kb
 from app.utils import path_detector
 
 router = Router()
