@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import os
 
 from aiogram import *
@@ -18,7 +19,9 @@ async def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+    logging.log(level=logging.ERROR, msg='Starting Bot...')
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print('Exit')
+        logging.log(level=logging.ERROR, msg='Exit...')
