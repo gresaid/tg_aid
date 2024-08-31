@@ -43,7 +43,7 @@ async def get_free_material(callback_query: CallbackQuery):
 
     await callback_query.bot.send_document(
         chat_id=callback_query.message.chat.id,
-        document=FSInputFile(path_detector("../file/image/aid_info.jpg")),
+        document=FSInputFile(path_detector("../file/pdf/Шпаргалка 2 номер ЕГЭ.pdf")),
         caption='Держи! Это твои бесплатные материалы!'
     )
     await callback_query.answer()
