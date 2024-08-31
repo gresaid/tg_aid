@@ -2,9 +2,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 main = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text='💌 Бесплатные материалы'),
-     KeyboardButton(text='✍️ Записаться на диагностику', ),
-     KeyboardButton(text='📔 Контакты')]
+    [KeyboardButton(text='💌 Бесплатные материалы')],
+    [KeyboardButton(text='✍️ Записаться на диагностику', )],
+    [KeyboardButton(text='📔 Контакты')]
 ], resize_keyboard=True, input_field_placeholder='Выберите пункт меню')
 
 
