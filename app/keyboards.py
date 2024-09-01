@@ -11,6 +11,7 @@ main = ReplyKeyboardMarkup(keyboard=[
 async def inline_contact():
     social_media = [['✅ Telegram ', 'https://t.me/gres_aid'],
                     ['✅ Youtube', 'https://www.youtube.com/@InfoCodexxx'],
+                    ['✅ Instagram', 'https://www.instagram.com/codex_info'],
                     ['✅ Дополнительные материалы на Boosty', 'https://boosty.to/gresaid']]
     keyboard = InlineKeyboardBuilder()
     for sc in social_media:
