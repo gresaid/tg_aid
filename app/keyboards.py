@@ -19,12 +19,12 @@ async def inline_contact():
 
 
 async def free_material():
-    free_materials = [['В какие вузы поступить? ⁉️ ', 'https://free.re'],
+    free_materials = [['В какие вузы поступить? ⁉️ ', ],
                       ['2 задание 😲']]
 
     keyboard = InlineKeyboardBuilder()
-    keyboard.add(InlineKeyboardButton(text=free_materials[0][0], url=free_materials[0][1]))
-    keyboard.add(InlineKeyboardButton(text=free_materials[1][0], callback_data='free_material'))
+    keyboard.add(InlineKeyboardButton(text=free_materials[0][0], callback_data='vuzi_free_material'))
+    keyboard.add(InlineKeyboardButton(text=free_materials[1][0], callback_data='shpargalka_free_material'))
     return keyboard.adjust(1).as_markup()
 
 

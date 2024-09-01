@@ -34,7 +34,7 @@ async def get_free_materials(message: Message):
         """, reply_markup=await kb.free_material())
 
 
-@router.callback_query(F.data == 'free_material')
+@router.callback_query(F.data == 'shpargalka_free_material')
 async def get_free_material(callback_query: CallbackQuery):
     await callback_query.bot.send_chat_action(
         chat_id=callback_query.message.chat.id,
@@ -45,5 +45,20 @@ async def get_free_material(callback_query: CallbackQuery):
         chat_id=callback_query.message.chat.id,
         document=FSInputFile(path_detector("../file/pdf/Шпаргалка 2 номер ЕГЭ.pdf")),
         caption='Держи! Это твои бесплатные материалы!'
+    )
+    await callback_query.answer()
+
+
+@router.callback_query(F.data == 'vuzi_free_material')
+async def get_free_material(callback_query: CallbackQuery):
+    await callback_query.bot.send_chat_action(
+        chat_id=callback_query.message.chat.id,
+        action=ChatAction.UPLOAD_DOCUMENT,
+    )
+
+    await callback_query.bot.send_document(
+        chat_id=callback_query.message.chat.id,
+        document=FSInputFile(path_detector("../file/pdf/Вузы.pdf")),
+        caption='Держи! Это твои бесплатные материалы! Не забудь подписаться на канал! '
     )
     await callback_query.answer()
